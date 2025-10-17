@@ -1,5 +1,17 @@
 You’re hitting iOS **code signing**. Two quick paths:
 
+
+
+
+
+
+
+
+
+
+
+
+
 ---
 
 # A) Just run on iOS **Simulator** (no signing needed)
