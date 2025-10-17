@@ -72,7 +72,7 @@ Keep it concise but informative, suitable for time tracking records.
       if (data['choices'] != null && data['choices'].isNotEmpty) {
         return {
           'success': true,
-          'notes': data['choices'][0]['message']['content'],
+          'userNote': data['choices'][0]['message']['content'],
         };
       } else {
         return {

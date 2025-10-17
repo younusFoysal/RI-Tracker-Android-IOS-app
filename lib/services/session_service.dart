@@ -45,8 +45,8 @@ class SessionService {
         'companyId': _authService
             .currentUser!.employeeId, // Using employeeId as companyId for now
         'startTime': startTime,
-        'notes': 'Session from RI Tracker Lite APP v1.',
-        'userNote': userNote,
+        'notes': userNote,
+        'userNote': "Session from Android/IOS app." + userNote,
       };
 
       final response = await _authService.dio.post(
@@ -116,8 +116,8 @@ class SessionService {
       final updateData = {
         'activeTime': _activeTimeSeconds,
         'idleTime': _idleTimeSeconds,
-        'notes': 'Session from RI Tracker Lite Android APP v1.',
-        'userNote': userNote,
+        'notes': userNote,
+        'userNote': "Session from Android/IOS app." + userNote,
       };
 
       // Add endTime for final update (when stopping timer)

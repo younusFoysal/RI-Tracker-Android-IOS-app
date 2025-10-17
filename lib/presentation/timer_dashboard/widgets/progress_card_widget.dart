@@ -318,12 +318,12 @@ class _ProgressCardWidgetState extends State<ProgressCardWidget>
                                 CircularPercentIndicator(
                                   radius: 10.w,
                                   lineWidth: 6.0,
-                                  percent: _progressAnimation.value,
+                                  percent: _progressAnimation.value.clamp(0.0, 1.0),
                                   center: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        '${(widget.productivityPercentage * _progressAnimation.value).toInt()}%',
+                                        '${(widget.productivityPercentage * _progressAnimation.value.clamp(0.0, 1.0)).toInt()}%',
                                         style: AppTheme
                                             .lightTheme
                                             .textTheme

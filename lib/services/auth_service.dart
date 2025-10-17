@@ -137,9 +137,12 @@ class AuthService {
 
         _setupDioInterceptors();
 
-        // Save credentials if remember me is true and we have token & user
-        if (rememberMe && _authToken != null && _currentUser != null) {
+        // Always save credentials to maintain session, regardless of rememberMe
+        if (_authToken != null && _currentUser != null) {
           await _saveAuthData();
+          print('[AuthService] Login successful, auth data saved. Token: ${_authToken?.substring(0, 20)}... User: ${_currentUser?.name}');
+        } else {
+          print('[AuthService] Warning: Login succeeded but token or user is null. Token: ${_authToken != null}, User: ${_currentUser != null}');
         }
 
         return {
@@ -201,7 +204,7 @@ class AuthService {
 
     try {
       final response = await _dio.get(
-        '${AppConfig.urls['PROFILE']!}/${_currentUser!.employeeId}',
+        '${AppConfig.urls['PROFILE']!}',
         options: Options(
           headers: {
             'Authorization': 'Bearer $_authToken',
@@ -228,7 +231,7 @@ class AuthService {
 
     try {
       final response = await _dio.get(
-        '${AppConfig.urls['PROFILE']!}/${_currentUser!.employeeId}',
+        '${AppConfig.urls['PROFILE']!}',
         options: Options(
           headers: {
             'Authorization': 'Bearer $_authToken',

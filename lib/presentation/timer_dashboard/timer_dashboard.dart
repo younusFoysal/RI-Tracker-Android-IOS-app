@@ -34,6 +34,7 @@ class _TimerDashboardState extends State<TimerDashboard>
   bool _isActive = false;
   bool _isPaused = false;
   DateTime? _startTime;
+  String _sessionNote = "";
 
   // Project and sync state
   String _selectedProject = 'RemoteIntegrity';
@@ -230,7 +231,7 @@ class _TimerDashboardState extends State<TimerDashboard>
     _timer?.cancel();
 
     // End session
-    final sessionResult = await _sessionService.endSession();
+    final sessionResult = await _sessionService.endSession(userNote: _sessionNote);
     if (!sessionResult['success']) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -245,6 +246,7 @@ class _TimerDashboardState extends State<TimerDashboard>
       _isPaused = false;
       _elapsedTime = Duration.zero;
       _startTime = null;
+      _sessionNote = "";
     });
 
     HapticFeedback.mediumImpact();
@@ -356,8 +358,13 @@ class _TimerDashboardState extends State<TimerDashboard>
     }
   }
 
-  void _addNote() {
-    Navigator.pushNamed(context, AppRoutes.sessionNotes);
+  void _addNote() async {
+    final result = await Navigator.pushNamed(context, AppRoutes.sessionNotes);
+    if (result != null && result is Map<String, dynamic>) {
+      setState(() {
+        _sessionNote = result['userNote'] ?? "";
+      });
+    }
   }
 
   Future<void> _onRefresh() async {

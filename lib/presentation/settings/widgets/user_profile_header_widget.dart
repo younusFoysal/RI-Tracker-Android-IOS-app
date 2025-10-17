@@ -32,10 +32,15 @@ class UserProfileHeaderWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  CustomIconWidget(
-                    iconName: 'arrow_back',
-                    color: AppTheme.surfaceWhite,
-                    size: 24,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: CustomIconWidget(
+                      iconName: 'arrow_back',
+                      color: AppTheme.surfaceWhite,
+                      size: 24,
+                    ),
                   ),
                   Expanded(
                     child: Text(

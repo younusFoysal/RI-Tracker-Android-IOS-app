@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../services/auth_service.dart';
 import './widgets/settings_item_widget.dart';
 import './widgets/settings_section_widget.dart';
 import './widgets/stepper_setting_widget.dart';
@@ -21,19 +22,34 @@ class _SettingsState extends State<Settings> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
   bool _isSearching = false;
+  final AuthService _authService = AuthService();
 
-  // Mock user data
-  final Map<String, dynamic> userData = {
-    "id": 1,
-    "name": "Sarah Johnson",
-    "email": "sarah.johnson@remoteintegrity.com",
-    "avatar":
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    "productivityStreak": 12,
-    "joinDate": "2024-01-15",
-    "totalHours": 1247.5,
-    "currentProject": "RemoteIntegrity"
-  };
+  // Get real user data from AuthService
+  Map<String, dynamic> get userData {
+    final user = _authService.currentUser;
+    if (user == null) {
+      return {
+        "id": "",
+        "name": "Guest User",
+        "email": "guest@remoteintegrity.com",
+        "avatar": "",
+        "productivityStreak": 0,
+        "joinDate": "",
+        "totalHours": 0.0,
+        "currentProject": "RemoteIntegrity"
+      };
+    }
+    return {
+      "id": user.id,
+      "name": user.name,
+      "email": user.email,
+      "avatar": user.avatar,
+      "productivityStreak": 0, // TODO: Calculate from stats service
+      "joinDate": user.createdAt,
+      "totalHours": 0.0, // TODO: Calculate from stats service
+      "currentProject": "RemoteIntegrity" // TODO: Get from current session
+    };
+  }
 
   // Settings state
   bool _autoStartTimer = true;

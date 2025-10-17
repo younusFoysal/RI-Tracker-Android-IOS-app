@@ -209,7 +209,7 @@ class _SessionNotesState extends State<SessionNotes> {
     // Simulate saving note with session data
     final noteData = {
       "sessionId": DateTime.now().millisecondsSinceEpoch.toString(),
-      "note": _notesController.text.trim(),
+      "userNote": _notesController.text.trim(),
       "duration": _sessionData["duration"],
       "projectName": _sessionData["projectName"],
       "timestamp": DateTime.now().toIso8601String(),

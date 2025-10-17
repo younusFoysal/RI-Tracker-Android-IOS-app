@@ -24,22 +24,22 @@ class _ProjectSelectorWidgetState extends State<ProjectSelectorWidget>
 
   final List<Map<String, dynamic>> projects = [
     {'name': 'RemoteIntegrity', 'color': AppTheme.primaryBlue, 'icon': 'work'},
-    {
-      'name': 'Project Alpha',
-      'color': AppTheme.successGreen,
-      'icon': 'science',
-    },
-    {'name': 'Project Beta', 'color': AppTheme.alertRed, 'icon': 'bug_report'},
-    {
-      'name': 'Client Work',
-      'color': const Color(0xFF9C27B0),
-      'icon': 'business',
-    },
-    {
-      'name': 'Internal Tasks',
-      'color': const Color(0xFFFF9800),
-      'icon': 'home_work',
-    },
+    // {
+    //   'name': 'Project Alpha',
+    //   'color': AppTheme.successGreen,
+    //   'icon': 'science',
+    // },
+    // {'name': 'Project Beta', 'color': AppTheme.alertRed, 'icon': 'bug_report'},
+    // {
+    //   'name': 'Client Work',
+    //   'color': const Color(0xFF9C27B0),
+    //   'icon': 'business',
+    // },
+    // {
+    //   'name': 'Internal Tasks',
+    //   'color': const Color(0xFFFF9800),
+    //   'icon': 'home_work',
+    // },
   ];
 
   @override
