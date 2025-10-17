@@ -201,13 +201,13 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30),
-                          child: Image.network(
-                            'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400',
+                          child: Image.asset(
+                            'assets/images/logo.png',
                             width: 35.w,
                             height: 35.w,
                             fit: BoxFit.cover,
                             semanticLabel:
-                                'Stopwatch timer on wooden desk with notepad and coffee cup',
+                                'RemoteIntegrity Time Tracking',
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
                                 decoration: BoxDecoration(
@@ -246,7 +246,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         SizedBox(height: 1.h),
                         Text(
-                          'Smart Time Tracking Made Simple',
+                          'RemoteIntegrity Time Tracking',
                           style: AppTheme.lightTheme.textTheme.titleMedium
                               ?.copyWith(
                             color: AppTheme.surfaceWhite.withValues(alpha: 0.9),

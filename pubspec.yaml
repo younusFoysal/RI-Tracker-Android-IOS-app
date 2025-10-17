@@ -41,8 +41,9 @@ flutter_icons:
   ios: true
   image_path: assets/images/logo.png
   min_sdk_android: 21
-  adaptive_icon_foreground: assets/images/logo.png
+  adaptive_icon_foreground: assets/images/logo_adaptive.png
   adaptive_icon_background: "#0B2C66"
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true # CRITICAL: Required for Material icon font - DO NOT REMOVE
