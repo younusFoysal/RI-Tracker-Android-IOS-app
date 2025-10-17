@@ -58,43 +58,23 @@ class _SplashScreenState extends State<SplashScreen>
       // Show splash for minimum 3 seconds
       await Future.delayed(const Duration(seconds: 3));
 
-      // TEMPORARY BYPASS: Load mock user data and navigate directly to timer dashboard
-      // TODO: Remove this bypass when login API is fixed
-      // await _loadMockUserData();
-      //
-      // if (mounted) {
-      //   // Navigate directly to timer dashboard with mock data
-      //   Navigator.pushReplacementNamed(context, AppRoutes.timerDashboard);
-      // }
-
-      // ORIGINAL CODE (COMMENTED OUT FOR BYPASS):
-      // /*
       // Initialize auth service and check for saved credentials
       final isAuthenticated = await _authService.initialize();
 
       if (mounted) {
         if (isAuthenticated) {
-          // User is already logged in, verify profile
-          final profileResult = await _authService.getProfile();
-          if (profileResult['success']) {
-            // Navigate to timer dashboard
-            Navigator.pushReplacementNamed(context, AppRoutes.timerDashboard);
-          } else {
-            // Profile fetch failed, show login
-            Navigator.pushReplacementNamed(context, AppRoutes.login);
-          }
+          // User is already logged in, navigate to timer dashboard
+          Navigator.pushReplacementNamed(context, AppRoutes.timerDashboard);
         } else {
           // No saved credentials, show login
           Navigator.pushReplacementNamed(context, AppRoutes.login);
         }
       }
-      // */
     } catch (e) {
       print('Error during app initialization: $e');
       if (mounted) {
-        // On error, still navigate to timer dashboard with mock data
-        //await _loadMockUserData();
-        Navigator.pushReplacementNamed(context, AppRoutes.timerDashboard);
+        // On error, show login screen
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
       }
     }
   }
@@ -174,9 +154,12 @@ class _SplashScreenState extends State<SplashScreen>
           child: AnimatedBuilder(
             animation: _animationController,
             builder: (context, child) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+              return SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
                   const Spacer(flex: 2),
 
                   // Logo with animations
@@ -308,6 +291,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
                 ],
+                ),
               );
             },
           ),

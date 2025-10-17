@@ -137,10 +137,12 @@ class AuthService {
 
         _setupDioInterceptors();
 
-        // Always save credentials to maintain session, regardless of rememberMe
-        if (_authToken != null && _currentUser != null) {
+        // Save credentials only if rememberMe is true
+        if (rememberMe && _authToken != null && _currentUser != null) {
           await _saveAuthData();
           print('[AuthService] Login successful, auth data saved. Token: ${_authToken?.substring(0, 20)}... User: ${_currentUser?.name}');
+        } else if (!rememberMe) {
+          print('[AuthService] Login successful, but remember me not checked. Session will not persist.');
         } else {
           print('[AuthService] Warning: Login succeeded but token or user is null. Token: ${_authToken != null}, User: ${_currentUser != null}');
         }
